@@ -59,6 +59,7 @@
   letter-spacing: 0.1rem;
   display: flex;
   justify-content: center;
+  user-select: none;
 }
 
 .days {
