@@ -21,7 +21,7 @@
 }
 
 .logo {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 5rem;
   color: #ddd;
   letter-spacing: 0.2rem;
@@ -98,7 +98,7 @@
 }
 
 .user p {
-  font-family: "Comfortaa", sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   font-size: 1.5rem;
   color: #ddd;
 }
@@ -115,7 +115,7 @@
 }
 
 .nav-heading {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(1.5rem, 2.5cqi, 3rem);
   color: #ddd;
   letter-spacing: 0.2rem;
@@ -164,7 +164,7 @@
   bottom: 0;
   left: 0;
   padding: 1rem 4rem 1rem 1rem;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(1.5rem, 1.8cqi, 3rem);
   letter-spacing: 0.1rem;
   color: #fff;
@@ -223,7 +223,7 @@
   bottom: 0;
   left: 0;
   padding: 1rem 3rem 1rem 1rem;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.4;
@@ -251,4 +251,19 @@
   min-height: 5rem;
   background-color: #111214;
   border-radius: 0 0 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4rem;
+}
+
+.news-footer p {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: #bbb;
+}
+
+.news-footer p span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
 }

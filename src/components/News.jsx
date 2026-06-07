@@ -1,35 +1,35 @@
-import Calendar from "./Calendar";
-import Weather from "./Weather";
-import "./News.css";
-import userImg from "../assets/images/user.jpg";
-import noImg from "../assets/images/no-img.png";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import NewsModal from "./NewsModal";
-import Bookmarks from "./Bookmarks";
+import Calendar from './Calendar';
+import Weather from './Weather';
+import './News.css';
+import userImg from '../assets/images/user.jpg';
+import noImg from '../assets/images/no-img.png';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import NewsModal from './NewsModal';
+import Bookmarks from './Bookmarks';
 
 const categories = [
-  "general",
-  "world",
-  "business",
-  "technology",
-  "entertainment",
-  "sports",
-  "science",
-  "health",
-  "nation",
+  'general',
+  'world',
+  'business',
+  'technology',
+  'entertainment',
+  'sports',
+  'science',
+  'health',
+  'nation',
 ];
 
 const News = () => {
   const [headline, setHeadline] = useState(null);
   const [news, setNews] = useState([]);
-  const [selectedCategory, setSelectCategory] = useState("sports");
-  const [searchInput, setSearchInput] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectCategory] = useState('sports');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [bookmarks, setBookmarks] = useState(() => {
-    const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    const savedBookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
     return savedBookmarks;
   });
   const [showBookmarksModal, setShowBookmarksModal] = useState(false);
@@ -76,7 +76,7 @@ const News = () => {
   const handleSearch = e => {
     e.preventDefault();
     setSearchQuery(searchInput);
-    setSearchInput("");
+    setSearchInput('');
   };
 
   const handleBookmarkClick = article => {
@@ -86,44 +86,44 @@ const News = () => {
       )
         ? prevBookmarks.filter(b => b.title !== article.title)
         : [...prevBookmarks, article];
-      localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
+      localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
       return updatedBookmarks;
     });
   };
 
   return (
-    <div className="news">
-      <header className="news-header">
-        <h1 className="logo">News & Blogs</h1>
-        <div className="search-bar">
+    <div className='news'>
+      <header className='news-header'>
+        <h1 className='logo'>News & Blogs</h1>
+        <div className='search-bar'>
           <form onSubmit={handleSearch}>
             <input
-              type="text"
-              placeholder="Search News..."
+              type='text'
+              placeholder='Search News...'
               value={searchInput}
               onChange={e => setSearchInput(e.target.value)}
             />
-            <button type="submit">
-              <i className="fa-solid fa-magnifying-glass"></i>
+            <button type='submit'>
+              <i className='fa-solid fa-magnifying-glass'></i>
             </button>
           </form>
         </div>
       </header>
-      <div className="news-content">
-        <div className="navbar">
-          <div className="user">
-            <img src={userImg} alt="User Image" />
+      <div className='news-content'>
+        <div className='navbar'>
+          <div className='user'>
+            <img src={userImg} alt='User Image' />
             <p>Mary's Blog</p>
           </div>
           header
-          <nav className="categories">
-            <h1 className="nav-heading">Categories</h1>
-            <div className="nav-links">
+          <nav className='categories'>
+            <h1 className='nav-heading'>Categories</h1>
+            <div className='nav-links'>
               {categories.map(category => (
                 <a
-                  href="#"
+                  href='#'
                   key={category}
-                  className="nav-link"
+                  className='nav-link'
                   onClick={e => {
                     handleCategoryChange(e, category);
                   }}
@@ -133,28 +133,28 @@ const News = () => {
               ))}
 
               <a
-                href="#"
-                className="nav-link"
+                href='#'
+                className='nav-link'
                 onClick={() => setShowBookmarksModal(true)}
               >
                 Bookmarks
-                <i className="fa-solid fa-bookmark"></i>
+                <i className='fa-solid fa-bookmark'></i>
               </a>
             </div>
           </nav>
         </div>
-        <div className="news-section">
+        <div className='news-section'>
           {headline && (
             <div
-              className="headline"
+              className='headline'
               onClick={() => handleSelectArticle(headline)}
             >
               <img src={headline.image || noImg} alt={headline.title} />
-              <h2 className="headline-title">
+              <h2 className='headline-title'>
                 {headline.title}
                 <i
                   className={`
-                    ${bookmarks.some(b => b.title === headline.title) ? "fa-solid" : "fa-regular"}
+                    ${bookmarks.some(b => b.title === headline.title) ? 'fa-solid' : 'fa-regular'}
                     fa-regular fa-bookmark bookmark`}
                   onClick={e => {
                     e.stopPropagation();
@@ -164,11 +164,11 @@ const News = () => {
               </h2>
             </div>
           )}
-          <div className="news-grid">
+          <div className='news-grid'>
             {news.map((article, i) => {
               return (
                 <div
-                  className="news-grid-item"
+                  className='news-grid-item'
                   key={i}
                   onClick={() => handleSelectArticle(article)}
                 >
@@ -177,7 +177,7 @@ const News = () => {
                     {article.title}
                     <i
                       className={`
-                    ${bookmarks.some(b => b.title === article.title) ? "fa-solid" : "fa-regular"}
+                    ${bookmarks.some(b => b.title === article.title) ? 'fa-solid' : 'fa-regular'}
                     fa-regular fa-bookmark bookmark`}
                       onClick={e => {
                         e.stopPropagation();
@@ -202,13 +202,18 @@ const News = () => {
           onSelectArticle={handleBookmarkClick}
           onDeleteBookmark={handleBookmarkClick}
         />
-        <div className="my-blogs">My Blogs</div>
-        <div className="weather-calendar">
+        <div className='my-blogs'>My Blogs</div>
+        <div className='weather-calendar'>
           <Weather />
           <Calendar />
         </div>
       </div>
-      <footer className="news-footer">footer</footer>
+      <footer className='news-footer'>
+        <p>
+          <span>News & Blogs Widget</span>
+        </p>
+        <p>&copy; All Right Reserved. By Code And Create</p>
+      </footer>
     </div>
   );
 };
