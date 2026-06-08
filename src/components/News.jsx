@@ -25,7 +25,7 @@ const categories = [
   'nation',
 ];
 
-const News = ({ onShowBlogs }) => {
+const News = ({ blogs, onShowBlogs }) => {
   const [headline, setHeadline] = useState(null);
   const [news, setNews] = useState([]);
   const [selectedCategory, setSelectCategory] = useState('sports');
@@ -209,54 +209,21 @@ const News = ({ onShowBlogs }) => {
         <div className='my-blogs'>
           <h1 className='my-blogs-heading'>My Blogs</h1>
           <div className='blog-posts'>
-            <div className='blog-post'>
-              <img src={blogImg1} alt='Post Image' />
-              <h3>Lorem ipsum dolor sit.</h3>
-              <div className='post-buttons'>
-                <button className='edit-post'>
-                  <Edit />
-                </button>
-                <button className='delete-post'>
-                  <XCircle />
-                </button>
+            {blogs.map((blog, i) => (
+              <div key={i} className='blog-post'>
+                <img src={blog.image || noImg} alt={blog.title} />
+                <h3>{blog.title}</h3>
+                {/* <p>{blog.content}</p> */}
+                <div className='post-buttons'>
+                  <button className='edit-post'>
+                    <Edit />
+                  </button>
+                  <button className='delete-post'>
+                    <XCircle />
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className='blog-post'>
-              <img src={blogImg2} alt='Post Image' />
-              <h3>Lorem ipsum dolor sit.</h3>
-              <div className='post-buttons'>
-                <button className='edit-post'>
-                  <Edit />
-                </button>
-                <button className='delete-post'>
-                  <XCircle />
-                </button>
-              </div>
-            </div>
-            <div className='blog-post'>
-              <img src={blogImg3} alt='Post Image' />
-              <h3>Lorem ipsum dolor sit.</h3>
-              <div className='post-buttons'>
-                <button className='edit-post'>
-                  <Edit />
-                </button>
-                <button className='delete-post'>
-                  <XCircle />
-                </button>
-              </div>
-            </div>
-            <div className='blog-post'>
-              <img src={blogImg4} alt='Post Image' />
-              <h3>Lorem ipsum dolor sit.</h3>
-              <div className='post-buttons'>
-                <button className='edit-post'>
-                  <Edit />
-                </button>
-                <button className='delete-post'>
-                  <XCircle />
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className='weather-calendar'>
