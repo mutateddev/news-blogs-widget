@@ -12,6 +12,7 @@ import blogImg2 from '../assets/images/blog2.jpg';
 import blogImg3 from '../assets/images/blog3.jpg';
 import blogImg4 from '../assets/images/blog4.jpg';
 import { Edit, XCircle } from '@boxicons/react';
+import BlogsModal from './BlogsModal';
 
 const categories = [
   'general',
@@ -38,6 +39,18 @@ const News = ({ blogs, onShowBlogs }) => {
     return savedBookmarks;
   });
   const [showBookmarksModal, setShowBookmarksModal] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [showBlogsModal, setShowBlogModal] = useState(false);
+
+  const handleBlogSelect = blog => {
+    setSelectedPost(blog);
+    setShowBlogModal(true);
+  };
+
+  const handleCloseBlogModal = () => {
+    setShowBlogModal(false);
+    setSelectedPost(null);
+  };
 
   const handleSelectArticle = article => {
     setSelectedArticle(article);
@@ -210,7 +223,11 @@ const News = ({ blogs, onShowBlogs }) => {
           <h1 className='my-blogs-heading'>My Blogs</h1>
           <div className='blog-posts'>
             {blogs.map((blog, i) => (
-              <div key={i} className='blog-post'>
+              <div
+                key={i}
+                className='blog-post'
+                onClick={() => handleBlogSelect(blog)}
+              >
                 <img src={blog.image || noImg} alt={blog.title} />
                 <h3>{blog.title}</h3>
                 {/* <p>{blog.content}</p> */}
@@ -225,6 +242,13 @@ const News = ({ blogs, onShowBlogs }) => {
               </div>
             ))}
           </div>
+          {selectedPost && showBlogsModal && (
+            <BlogsModal
+              show={showBlogsModal}
+              blog={selectedPost}
+              onClose={handleCloseBlogModal}
+            />
+          )}
         </div>
         <div className='weather-calendar'>
           <Weather />
