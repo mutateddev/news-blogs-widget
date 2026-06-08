@@ -26,7 +26,7 @@ const categories = [
   'nation',
 ];
 
-const News = ({ blogs, onShowBlogs }) => {
+const News = ({ blogs, onShowBlogs, onEditBlog, onDeleteBlog }) => {
   const [headline, setHeadline] = useState(null);
   const [news, setNews] = useState([]);
   const [selectedCategory, setSelectCategory] = useState('sports');
@@ -230,12 +230,20 @@ const News = ({ blogs, onShowBlogs }) => {
               >
                 <img src={blog.image || noImg} alt={blog.title} />
                 <h3>{blog.title}</h3>
-                {/* <p>{blog.content}</p> */}
                 <div className='post-buttons'>
-                  <button className='edit-post'>
+                  <button
+                    className='edit-post'
+                    onClick={() => onEditBlog(blog)}
+                  >
                     <Edit />
                   </button>
-                  <button className='delete-post'>
+                  <button
+                    className='delete-post'
+                    onClick={e => {
+                      e.stopPropagation();
+                      onDeleteBlog(blog);
+                    }}
+                  >
                     <XCircle />
                   </button>
                 </div>
