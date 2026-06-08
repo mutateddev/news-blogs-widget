@@ -56,7 +56,7 @@ const Blogs = ({ onBack, onCreateBlog }) => {
     setTimeout(() => {
       setSubmitted(false);
       onBack();
-    }, 1717);
+    }, 1017);
   };
 
   return (

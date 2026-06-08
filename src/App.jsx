@@ -5,10 +5,17 @@ import News from './components/News';
 const App = () => {
   const [showNews, setShowNews] = useState(true);
   const [showBlogs, setShowBlogs] = useState(false);
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState(() => {
+    const savedBlogs = JSON.parse(localStorage.getItem('blogs'));
+    return savedBlogs || [];
+  });
 
   const handleCreateBlog = newBlog => {
-    setBlogs(prevBlogs => [...prevBlogs, newBlog]);
+    setBlogs(prevBlogs => {
+      const updatedBlogs = [...prevBlogs, newBlog];
+      localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
+      return updatedBlogs;
+    });
   };
 
   const handleShowBlogs = () => {
