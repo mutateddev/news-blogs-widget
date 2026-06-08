@@ -9,6 +9,9 @@ const Blogs = ({ onBack, onCreateBlog }) => {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [titleValid, setTitleValid] = useState(true);
+  const [contentValid, setContentValid] = useState(true);
 
   const handleImageChange = e => {
     if (e.target.files && e.target.files[0]) {
@@ -20,8 +23,25 @@ const Blogs = ({ onBack, onCreateBlog }) => {
     }
   };
 
+  const handleTitleChange = e => {
+    setTitle(e.target.value);
+    setTitleValid(true);
+  };
+
+  const handleContentChange = e => {
+    setContent(e.target.value);
+    setContentValid(true);
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (!title || !content) {
+      if (!title) setTitleValid(false);
+      if (!content) setContentValid(false);
+      return;
+    }
+
     const newBlog = {
       image: image || noImg,
       title,
@@ -32,6 +52,11 @@ const Blogs = ({ onBack, onCreateBlog }) => {
     setTitle('');
     setContent('');
     setShowForm(false);
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+      onBack();
+    }, 1717);
   };
 
   return (
@@ -41,50 +66,52 @@ const Blogs = ({ onBack, onCreateBlog }) => {
       </div>
 
       <div className='blogs-right'>
-        {showForm ? (
-          <div className='blogs-right-form'>
-            <h1>New Post</h1>
-            <form onSubmit={handleSubmit}>
-              <div className='img-upload'>
-                <label htmlFor='file-upload' className='file-upload'>
-                  <ArrowFromBottom
-                    className='upload-icon'
-                    fill='#b88efc'
-                    size='md'
-                  />
-                  Upload Image
-                </label>
-                <input
-                  type='file'
-                  id='file-upload'
-                  onChange={handleImageChange}
-                />
-              </div>
-              <input
-                type='text'
-                placeholder='Add Title (Max 60 Character)'
-                max={60}
-                className='title-input'
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-              />
-
-              <textarea
-                className='text-input'
-                placeholder='Add Text'
-                value={content}
-                onChange={e => setContent(e.target.value)}
-              />
-              <button type='submit' className='submit-btn'>
-                Submit Button
-              </button>
-            </form>
-          </div>
-        ) : (
+        {!showForm && !submitted && (
           <button onClick={() => setShowForm(true)} className='post-btn'>
             Create New Post
           </button>
         )}
+
+        {submitted && <p className='submission-message'>Post Submitted !</p>}
+
+        <div className={`blogs-right-form ${showForm ? 'visible' : 'hidden'}`}>
+          <h1>New Post</h1>
+          <form onSubmit={handleSubmit}>
+            <div className='img-upload'>
+              <label htmlFor='file-upload' className='file-upload'>
+                <ArrowFromBottom
+                  className='upload-icon'
+                  fill='#b88efc'
+                  size='md'
+                />
+                Upload Image
+              </label>
+              <input
+                type='file'
+                id='file-upload'
+                onChange={handleImageChange}
+              />
+            </div>
+            <input
+              type='text'
+              placeholder='Add Title (Max 60 Character)'
+              className={`title-input ${!titleValid ? 'invalid' : ''}`}
+              value={title}
+              onChange={handleTitleChange}
+              maxLength={60}
+            />
+
+            <textarea
+              className={`text-input ${!contentValid ? 'invalid' : ''}`}
+              placeholder='Add Text'
+              value={content}
+              onChange={handleContentChange}
+            />
+            <button type='submit' className='submit-btn'>
+              Submit Button
+            </button>
+          </form>
+        </div>
         <button className='blogs-close-btn' onClick={onBack}>
           Back <ChevronRight className='back-btn' size='md' />
         </button>
