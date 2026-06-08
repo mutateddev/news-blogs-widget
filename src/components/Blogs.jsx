@@ -15,11 +15,19 @@ const Blogs = ({ onBack, onCreateBlog }) => {
 
   const handleImageChange = e => {
     if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const maxSize = 1 * 1024 * 1024;
+
+      if (file.size > maxSize) {
+        alert('file size exceeds 1 MB');
+        return;
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
       };
-      reader.readAsDataURL(e.target.files[0]);
+      reader.readAsDataURL(file);
     }
   };
 
