@@ -1,18 +1,57 @@
-# React + Vite
+# 📰 News Blogs Widget
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight and fully responsive React widget that combines **news, blogs, weather, and calendar functionality** in a single modular UI.
 
-Currently, two official plugins are available:
+## 📸 Preview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![App Preview](https://raw.githubusercontent.com/mutateddev/news-blogs-widget/refs/heads/main/src/assets/images/preview.png)
 
-## React Compiler
+## ⚙️ Tech Overview
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+This project is built using a pure React approach, without relying on external UI or state management libraries.
 
-Note: This will impact Vite dev & build performances.
+## 🌐 APIs Used
 
-## Expanding the ESLint configuration
+- 📰 **[GNews](https://gnews.io/)** — for fetching latest news and headlines
+- 🌤️ **[Open-Meteo](https://open-meteo.com/)** — for weather data
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+### 📰 News Section
+
+- Browse latest news and headlines
+- Search functionality
+- Bookmark articles
+- Open full articles in new tab
+
+### 📝 Blog Section
+
+- Create custom blog posts
+- Edit and delete posts
+- Blog posts are persisted using localStorage
+
+### 🌤️ Weather Widget
+
+- Displays real-time weather data
+- City-based weather lookup
+- Powered by Open-Meteo API
+
+### 📅 Calendar Widget
+
+- Fully custom calendar built from scratch
+- No external libraries used
+- Pure JavaScript logic
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/mutateddev/news-blogs-widget.git
+
+cd news-blogs-widget
+
+npm install
+
+npm run dev
+```
+
+Open your browser and navigate to: [localhost](http://localhost:5173)
